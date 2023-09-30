@@ -1,0 +1,61 @@
+
+/* Center the content vertically and horizontally */
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  /* Common styles for the form container */
+  .form-container {
+    height: 50vh;
+    width: 50vh;
+    padding: 5px;
+    background-color: rgb(19, 6, 66);
+    box-shadow: 5px 5px 5px rgb(93, 92, 92);
+    border-radius: 5px;
+    padding-top: 2%;
+    padding-bottom: 2%;
+  }
+
+  /* Gradient background */
+  .gradient-bg {
+    background: -webkit-repeating-linear-gradient(
+      blue,
+      white,
+      yellow,
+      pink
+    );
+  }
+
+  /* Heading styles */
+  h1 {
+    margin-bottom: 7%;
+    text-decoration: underline;
+  }
+  label {
+    display: block;
+    margin-bottom: 5px;
+    color: white;
+  }
+  input[type="text"],
+  input[type="number"],
+  input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  button {
+    background-color: white;
+    border-style: none;
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  button + button {
+    margin-left: 10px;
+  }
