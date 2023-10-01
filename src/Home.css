@@ -1,0 +1,30 @@
+/* Home.css */
+.home-container {
+    text-align: center;
+    padding: 20px;
+  }
+
+  .header {
+    background-color: #007bff;
+    color: #fff;
+    padding: 20px;
+  }
+
+  .main-content {
+    margin: 20px;
+  }
+
+  .logout-button {
+    background-color: #dc3545;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+  }
+
+  .footer {
+    background-color: #f8f9fa;
+    padding: 10px;
+  }

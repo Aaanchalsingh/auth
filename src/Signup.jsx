@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth } from "./firebase.js";
+import {
+  createUserWithEmailAndPassword,
+  updateProfile,
+  signInWithPopup,
+} from "firebase/auth";
+import { auth, provider } from "./firebase.js";
 
 function Signup() {
   const navigate = useNavigate();
@@ -13,6 +17,24 @@ function Signup() {
   const [errorMsg, setErrorMsg] = useState("");
   const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
 
+  useEffect(() => {
+    const user = localStorage.getItem("email");
+    if (user) {
+      navigate("/home"); // Redirect to the "Home.jsx" component
+    }
+  }, [navigate]);
+
+  const handleClick = () => {
+    signInWithPopup(auth, provider)
+      .then((data) => {
+        localStorage.setItem("email", data.user.email);
+        navigate("/home"); // Redirect to the "Home.jsx" component
+      })
+      .catch((error) => {
+        console.error(error.message);
+      });
+  };
+
   const handleSubmission = () => {
     if (!values.name || !values.email || !values.pass) {
       setErrorMsg("Fill all fields");
@@ -23,12 +45,11 @@ function Signup() {
     setSubmitButtonDisabled(true);
     createUserWithEmailAndPassword(auth, values.email, values.pass)
       .then(async (res) => {
-        setSubmitButtonDisabled(false);
         const user = res.user;
         await updateProfile(user, {
           displayName: values.name,
         });
-        navigate("/");
+        navigate("/home"); // Redirect to the "Home.jsx" component
       })
       .catch((err) => {
         setSubmitButtonDisabled(false);
@@ -78,6 +99,12 @@ function Signup() {
           </p>
         </div>
       </div>
+          <img
+            src="google.png"
+            alt=""
+            style={{ height: "50px", width: "250px" ,borderRadius:"10px"}}
+            onClick={handleClick}
+          />
     </div>
   );
 }
