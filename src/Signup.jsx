@@ -41,7 +41,7 @@ function Signup() {
     <div className="container">
       <div className="innerBox">
         <h1 className="heading">Signup</h1>
-
+        <label htmlFor="Name">Name</label>
         <input
           label="Name"
           placeholder="Enter your name"
@@ -49,6 +49,7 @@ function Signup() {
             setValues((prev) => ({ ...prev, name: event.target.value }))
           }
         />
+        <label htmlFor="email">Email</label>
         <input
           label="Email"
           placeholder="Enter email address"
@@ -56,6 +57,7 @@ function Signup() {
             setValues((prev) => ({ ...prev, email: event.target.value }))
           }
         />
+        <label htmlFor="Pass">Password</label>
         <input
           label="Password"
           placeholder="Enter password"
