@@ -3,8 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "./firebase.js";
 
-import "./Login.css";
-
 function Login() {
   const navigate = useNavigate();
   const [values, setValues] = useState({
