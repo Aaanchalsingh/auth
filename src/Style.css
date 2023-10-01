@@ -1,5 +1,8 @@
 
 /* Center the content vertically and horizontally */
+/* *{
+  background: linear-gradient(to right,#9900ff,#cc80ff);
+} */
 .center {
     display: flex;
     justify-content: center;

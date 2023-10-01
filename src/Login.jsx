@@ -1,26 +1,69 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "./firebase.js";
+
+import "./Login.css";
 
 function Login() {
+  const navigate = useNavigate();
+  const [values, setValues] = useState({
+    email: "",
+    pass: "",
+  });
+  const [errorMsg, setErrorMsg] = useState("");
+  const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
+
+  const handleSubmission = () => {
+    if (!values.email || !values.pass) {
+      setErrorMsg("Fill all fields");
+      return;
+    }
+    setErrorMsg("");
+
+    setSubmitButtonDisabled(true);
+    signInWithEmailAndPassword(auth, values.email, values.pass)
+      .then(async (res) => {
+        setSubmitButtonDisabled(false);
+
+        navigate("/");
+      })
+      .catch((err) => {
+        setSubmitButtonDisabled(false);
+        setErrorMsg(err.message);
+      });
+  };
   return (
-    <div className="center">
-      <div className="form-container gradient-bg">
-        <h1>Login</h1>
-        <div className="form-content">
-          <label htmlFor="lemail">Email</label>
-          <input type="email" id="lemail" />
-          <br />
-          <br />
-          <label htmlFor="lpass">Password</label>
-          <input type="password" id="lpass" />
-          <br />
-          <br />
-          <button type="submit" className="btn">
-            Submit
+    <div className="container">
+      <div className="innerBox">
+        <h1 className="heading">Login</h1>
+
+        <input
+          label="Email"
+          onChange={(event) =>
+            setValues((prev) => ({ ...prev, email: event.target.value }))
+          }
+          placeholder="Enter email address"
+        />
+        <input
+          label="Password"
+          onChange={(event) =>
+            setValues((prev) => ({ ...prev, pass: event.target.value }))
+          }
+          placeholder="Enter Password"
+        />
+
+        <div className="footer">
+          <b className="error">{errorMsg}</b>
+          <button disabled={submitButtonDisabled} onClick={handleSubmission}>
+            Login
           </button>
-          <button type="submit" className="btn">
-            <Link to="/signup">Signup</Link>
-          </button>
+          <p>
+            Already have an account?{" "}
+            <span>
+              <Link to="/">Sign up</Link>
+            </span>
+          </p>
         </div>
       </div>
     </div>
