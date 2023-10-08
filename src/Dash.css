@@ -1,0 +1,49 @@
+.chat-app-dashboard {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  border-radius:10%;
+}
+
+.blue-portion {
+  flex: 0 0 20%;
+  height: 100%;
+  background-color: rgb(11, 11, 245);
+}
+.gray-portion {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(239, 235, 235);
+  position: relative;
+}
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+}
+.chat-input {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: white;
+  border-radius: 15px;
+}
+.chat-input input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 0;
+  font-size: 16px;
+  text-align: center;
+  outline: none;
+}
+.chat-input button {
+  padding: 10px 20px;
+  background-color: blue;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}

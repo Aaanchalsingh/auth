@@ -16,7 +16,7 @@ function Login() {
   useEffect(() => {
     const user = localStorage.getItem("email");
     if (user) {
-      navigate("/home"); // Redirect to the "Home.jsx" component
+      navigate("/dashboard"); // Redirect to the "Home.jsx" component
     }
   }, [navigate]);
 
@@ -24,7 +24,7 @@ function Login() {
     signInWithPopup(auth, provider)
       .then((data) => {
         localStorage.setItem("email", data.user.email);
-        navigate("/home"); // Redirect to the "Home.jsx" component
+        navigate("/dashboard"); // Redirect to the "Home.jsx" component
       })
       .catch((error) => {
         console.error(error.message);
@@ -42,7 +42,7 @@ function Login() {
       .then(async (res) => {
         setSubmitButtonDisabled(false);
 
-        navigate("/home");
+        navigate("/dashboard");
       })
       .catch((err) => {
         setSubmitButtonDisabled(false);

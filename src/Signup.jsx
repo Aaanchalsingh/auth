@@ -20,7 +20,7 @@ function Signup() {
   useEffect(() => {
     const user = localStorage.getItem("email");
     if (user) {
-      navigate("/home"); // Redirect to the "Home.jsx" component
+      navigate("/dashboard"); // Redirect to the "Home.jsx" component
     }
   }, [navigate]);
 
@@ -28,7 +28,7 @@ function Signup() {
     signInWithPopup(auth, provider)
       .then((data) => {
         localStorage.setItem("email", data.user.email);
-        navigate("/home"); // Redirect to the "Home.jsx" component
+        navigate("/dashboard"); // Redirect to the "Home.jsx" component
       })
       .catch((error) => {
         console.error(error.message);
@@ -49,7 +49,7 @@ function Signup() {
         await updateProfile(user, {
           displayName: values.name,
         });
-        navigate("/home"); // Redirect to the "Home.jsx" component
+        navigate("/dashboard"); // Redirect to the "Home.jsx" component
       })
       .catch((err) => {
         setSubmitButtonDisabled(false);
