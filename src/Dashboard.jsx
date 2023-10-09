@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Dash.css";
-import io from "socket.io-client";
+import { database } from "./firebase"; // Assuming your Firebase initialization is done in "./firebase"
+import { push, ref, onValue } from "firebase/database";
 
-const socket = io("http://localhost:4000"); // Replace with your server's address
+const chatRef = ref(database, "Chat");
 
-function Dashboard() {
+function getRandomColor() {
+  // Generate a random color in hexadecimal format
+  return "#" + Math.floor(Math.random() * 16777215).toString(16);
+}
+
+function Dashboard({ user }) {
   const [inputText, setInputText] = useState("");
   const [messages, setMessages] = useState([]);
 
@@ -14,34 +20,35 @@ function Dashboard() {
     window.location.reload();
   };
 
-  useEffect(() => {
-    socket.on("chat message", (message) => {
-      setMessages([...messages, message]);
-    });
-
-    return () => {
-      socket.off("chat message");
-    };
-  }, [messages]);
-
   const handleSendMessage = (e) => {
-    if (inputText.trim() !== "") {
-      socket.emit("chat message", {
+    if ((e.key === "Enter" || e.type === "click") && inputText.trim() !== "") {
+      const userColor = getRandomColor();
+      // Push a new message to the "Chat" reference
+      push(chatRef, {
         text: inputText,
-        sender: "Arya",
+        timestamp: Date.now(),
+        sender: "Aanchal",
+        backgroundColor: userColor, // Store the user's color with the message
+      }).then(() => {
+        setInputText(""); // Clear the input field after sending a message
       });
     }
-
-    if (e.key === "Enter" || e.type === "click") {
-      const messageInput = document.getElementById("messageInput");
-      const message = messageInput.value;
-      if (message.trim() !== "") {
-        setMessages([...messages, { text: message, sender: "Arya" }]);
-        messageInput.value = "";
-      }
-      setInputText("");
-    }
   };
+
+  useEffect(() => {
+    const unsubscribe = onValue(chatRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        // Convert the object of messages into an array
+        const messageArray = Object.values(data);
+        setMessages(messageArray);
+      }
+    });
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
   return (
     <div className="home-container">
       <div id="a1">
@@ -65,7 +72,13 @@ function Dashboard() {
           </button>
           <div className="chat-box" id="chatBox">
             {messages.map((message, index) => (
-              <div key={index} className="message-box">
+              <div
+                key={index}
+                className="message-box"
+                style={{
+                  backgroundColor: message.backgroundColor
+                }}
+              >
                 {message.text}
               </div>
             ))}
@@ -75,9 +88,9 @@ function Dashboard() {
             className="input-box"
             id="messageInput"
             placeholder="Type a message..."
-            onKeyDown={handleSendMessage}
             value={inputText}
-            onChange={(e) => setInputText(e.target.value)}
+            onChange={(e) => setInputText(e.target.value)} // Update inputText when input changes
+            onKeyDown={handleSendMessage}
           />
           <button className="chat-input" onClick={handleSendMessage}>
             Send
