@@ -1,11 +1,50 @@
 #a1 {
-  background-color: #033fff;
+  background: rgb(20, 48, 208);
+  background: linear-gradient(90deg, rgb(55, 76, 193) 0%, rgba(1, 4, 19, 0.9808298319327731) 100%, rgba(230, 228, 242, 0.9444152661064426) 100%);
   position: absolute;
   left: 0.5%;
   top: 2%;
   width: 30vw;
   height: 97vh;
   border-radius: 3%;
+}
+
+.img1 {
+
+  height: 20vh;
+  width: 10vw;
+  border-radius: 100%;
+  position: fixed;
+  top: 3%;
+  left: 3%;
+
+}
+
+.img2 {
+  height: 3vh;
+  width: 2vw;
+  border-radius: 100%;
+  position: fixed;
+  top: 80%;
+  left: 3%;
+}
+
+.img3 {
+  height: 3vh;
+  width: 2vw;
+  border-radius: 100%;
+  position: fixed;
+  top: 80%;
+  left: 5.5%;
+}
+
+.img4 {
+  height: 3vh;
+  width: 2vw;
+  border-radius: 100%;
+  position: fixed;
+  top: 80%;
+  left: 8%;
 }
 
 #a2 {
@@ -22,7 +61,8 @@
 
 .chat-box {
   width: 100%;
-  height: 97%;
+  height: 85vh;
+
   overflow-y: scroll;
   margin-left: 1%;
 }
@@ -41,8 +81,8 @@
   position: fixed;
   top: 90.6%;
   left: 91%;
-  background-color: blue;
-  /* Blue send button */
+  background: rgb(2, 3, 13);
+  background: linear-gradient(90deg, rgba(3, 17, 92, 1) 0%, rgba(1, 4, 19, 0.9808298319327731) 100%, rgba(230, 228, 242, 0.9444152661064426) 100%);
   color: rgb(255, 255, 255);
   /* White text color */
   border: none;
@@ -56,7 +96,8 @@
   position: fixed;
   top: 90%;
   left: 4%;
-  background-color: rgb(7, 7, 17);
+  background: rgb(2, 3, 13);
+  background: linear-gradient(90deg, rgba(3, 17, 92, 1) 0%, rgba(1, 4, 19, 0.9808298319327731) 100%, rgba(230, 228, 242, 0.9444152661064426) 100%);
   /* Blue send button */
   color: rgb(255, 255, 255);
   /* White text color */
@@ -67,7 +108,8 @@
 }
 
 .message-box {
-  background-color: #0c0404;
+  background: rgb(3, 17, 92);
+  background: linear-gradient(90deg, rgba(3, 17, 92, 1) 0%, rgba(1, 4, 19, 0.9808298319327731) 100%, rgba(230, 228, 242, 0.9444152661064426) 100%);
   color: #f8f6f6;
   padding: 10px;
   margin: 5px 0;
@@ -81,4 +123,147 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
+}
+
+@media (max-width: 750px) {
+  .home-container {
+    padding: 10px;
+  }
+
+  img {
+    height: 10vh;
+    width: 5vw;
+  }
+
+  #img {
+    width: 50vw;
+  }
+
+  .chat-box {
+    height: 50vh;
+
+  }
+
+  .input-box {
+    width: 80%;
+  }
+
+  .chat-input {
+    width: 20%;
+
+  }
+
+  #a1 {
+    width: 30vh;
+  }
+
+  #img {
+
+    width: 29vw;
+  }
+}
+
+/* Your existing CSS */
+
+@media (max-width: 420px) {
+  body {
+    background: rgb(3, 17, 92);
+    background: linear-gradient(90deg, rgba(3, 17, 92, 1) 0%, rgba(1, 4, 19, 0.9808298319327731) 100%, rgba(230, 228, 242, 0.9444152661064426) 100%);
+  }
+
+
+  #a1 {
+    width: 40vw;
+    left: 0.5%;
+    top: 2%;
+
+  }
+
+  .chat-box {
+    height: 80vh;
+  }
+
+  .input-box {
+    top: 92%;
+    width: 75%;
+    padding: 10px;
+  }
+
+  .chat-input {
+    top: 91.62%;
+    left: 75%;
+    font-size: 14px;
+    background: rgb(2, 3, 13);
+    background: linear-gradient(90deg, rgba(3, 17, 92, 1) 0%, rgba(1, 4, 19, 0.9808298319327731) 100%, rgba(230, 228, 242, 0.9444152661064426) 100%);
+  }
+
+  .chat-logout {
+    top: 91.5%;
+    left: 1%;
+    width: 20vw;
+
+
+  }
+
+  .message-box {
+    max-width: 90%;
+    background: rgb(3, 17, 92);
+    background: linear-gradient(90deg, rgba(3, 17, 92, 1) 0%, rgba(1, 4, 19, 0.9808298319327731) 100%, rgba(230, 228, 242, 0.9444152661064426) 100%);
+
+  }
+
+  .home-container {
+    padding: 5px;
+
+  }
+
+  .img1 {
+    height: 10vh;
+    width: 20vw;
+    border-radius: 100%;
+    position: fixed;
+    top: 3%;
+    left: 0%;
+  }
+
+  .img2 {
+    height: 4vh;
+    width: 3vw;
+    border-radius: 100%;
+    position: fixed;
+    top: 83%;
+    left: 4%;
+  }
+
+  .img3 {
+    height: 4vh;
+    width: 3vw;
+    border-radius: 100%;
+    position: fixed;
+    top: 83%;
+    left: 9%;
+  }
+
+  .img4 {
+    height: 4vh;
+    width: 3vw;
+    border-radius: 100%;
+    position: fixed;
+    top: 83%;
+    left: 14%;
+  }
+  .logou{
+    text-align: left;
+  }
+  .icon {
+    height: 40px;
+    width: 40px;
+  }
+
+  .button {
+    background: transparent;
+    outline: none;
+    border: none;
+  }
+
 }

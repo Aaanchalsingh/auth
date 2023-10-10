@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Dash.css";
-import { database } from "./firebase"; // Assuming your Firebase initialization is done in "./firebase"
+import { database } from "./firebase";
 import { push, ref, onValue } from "firebase/database";
 
 const chatRef = ref(database, "Chat");
 
 function getRandomColor() {
-  // Generate a random color in hexadecimal format
   return "#" + Math.floor(Math.random() * 16777215).toString(16);
 }
 
@@ -15,9 +14,22 @@ function Dashboard({ user }) {
   const [inputText, setInputText] = useState("");
   const [messages, setMessages] = useState([]);
 
+  const formatTimestamp = (timestamp) => {
+    const date = new Date(timestamp);
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    return `${hours}:${minutes < 10 ? "0" : ""}${minutes}`;
+  };
   const logout = () => {
     localStorage.clear();
     window.location.reload();
+  };
+  const addEmoji = (e) => {
+    let sym = e.unified.split("-");
+    let codesArray = [];
+    sym.forEach((el) => codesArray.push("0x" + el));
+    let emoji = String.fromCodePoint(...codesArray);
+    setInput(input + emoji);
   };
 
   const handleSendMessage = (e) => {
@@ -52,21 +64,14 @@ function Dashboard({ user }) {
   return (
     <div className="home-container">
       <div id="a1">
-        <img
-          src="pro.jpg"
-          alt=""
-          style={{
-            height: "20vh",
-            width: "10vw",
-            borderRadius: "100%",
-            position: "fixed",
-            top: "3%",
-            left: "3%",
-          }}
-        />
+        <img class="img1" src="pro.jpg" alt="" />
         <div id="a2">
           <button className="chat-logout" onClick={logout}>
-            <Link to="/" style={{ color: "white", textDecoration: "none" }}>
+            <Link
+              to="/"
+              class="logou"
+              style={{ color: "white", textDecoration: "none" }}
+            >
               Logout
             </Link>
           </button>
@@ -76,10 +81,15 @@ function Dashboard({ user }) {
                 key={index}
                 className="message-box"
                 style={{
-                  backgroundColor: message.backgroundColor
+                  backgroundColor: message.backgroundColor,
+                  alignSelf:
+                    message.sender === user ? "flex-end" : "flex-start",
                 }}
               >
-                {message.text}
+                {message.text}{" "}
+                <div className="timestamp">
+                  {formatTimestamp(message.timestamp)}
+                </div>
               </div>
             ))}
           </div>
